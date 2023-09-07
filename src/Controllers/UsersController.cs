@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Child.Growth.src.Data;
 using Child.Growth.src.Entities;
+using Child.Growth.src.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Child.Growth.src.Controllers
 {
@@ -15,21 +9,18 @@ namespace Child.Growth.src.Controllers
     {
         private readonly ILogger<UsersController> _logger;
 
-        private readonly ApplicationDbContext _context;
+        private readonly IUsersService _usersService;
 
-        public UsersController(ILogger<UsersController> logger, ApplicationDbContext context)
+        public UsersController(ILogger<UsersController> logger, IUsersService usersService)
         {
             _logger = logger;
-            _context = context;
+            _usersService = usersService;
         }
 
         [HttpGet]
         public List<Users> Get()
         {
-            var users = _context.Users
-                .ToList();
-
-            return users;
+            return _usersService.GetAll().ToList();
         }
     }
 }

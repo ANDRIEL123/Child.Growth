@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Child.Growth.src.Data;
+using Child.Growth.src.Data.UnitOfWork;
+using Child.Growth.src.Injection;
+using Child.Growth.src.Repositories.Base;
+using Child.Growth.src.Repositories.Interfaces.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace Child.Growth
@@ -23,18 +23,18 @@ namespace Child.Growth
             // Adicione serviços do ASP.NET Core MVC
             services.AddControllersWithViews();
 
+            // Registra o repositório no Container de Injeção de Dependência
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            // Registra o Unit of Work no Container de Injeção de Dependência
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Injeta os serviços
+            InjectServices.AddServices(services);
+
             // Configuração do banco de dados (se estiver usando Entity Framework Core)
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            // Outros serviços e injeções de dependência
-
-            // Registro de serviços personalizados
-            // services.AddScoped<IMeuServico, MeuServico>();
-
-            // Registro de serviços para autenticação e autorização (se necessário)
-            // services.AddAuthentication();
-            // services.AddAuthorization();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
