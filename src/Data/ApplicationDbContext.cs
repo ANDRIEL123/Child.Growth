@@ -1,4 +1,4 @@
-using Child.Growth.src.Entities;
+using Child.Growth.src.Injection;
 using Microsoft.EntityFrameworkCore;
 
 namespace Child.Growth.src.Data
@@ -27,6 +27,9 @@ namespace Child.Growth.src.Data
             }
         }
 
-        public DbSet<Users> Users { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            InjectMappings.Add(modelBuilder);
+        }
     }
 }

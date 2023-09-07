@@ -22,5 +22,12 @@ namespace Child.Growth.src.Services
 
             return users;
         }
+
+        public void Create(Users user)
+        {
+            _repository.Add(user);
+
+            _uow.SaveChanges();
+        }
     }
 }

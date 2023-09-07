@@ -22,5 +22,11 @@ namespace Child.Growth.src.Controllers
         {
             return _usersService.GetAll().ToList();
         }
+
+        [HttpPost]
+        public void Create([FromBody] Users user)
+        {
+            _usersService.Create(user);
+        }
     }
 }
