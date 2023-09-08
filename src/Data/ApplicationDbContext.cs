@@ -1,4 +1,4 @@
-using Child.Growth.src.Injection;
+using Child.Growth.src.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
 namespace Child.Growth.src.Data

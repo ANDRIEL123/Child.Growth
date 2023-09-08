@@ -1,9 +1,12 @@
+using System.Text;
 using Child.Growth.src.Data;
 using Child.Growth.src.Data.UnitOfWork;
-using Child.Growth.src.Injection;
+using Child.Growth.src.DependencyInjection;
 using Child.Growth.src.Repositories.Base;
 using Child.Growth.src.Repositories.Interfaces.Base;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Child.Growth
 {
@@ -32,7 +35,21 @@ namespace Child.Growth
             // Injeta os serviços
             InjectServices.AddServices(services);
 
-            // Configuração do banco de dados (se estiver usando Entity Framework Core)
+            // Adiciona autenticação JWT Bearer
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Authentication:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:SecretKey"]))
+                    };
+                });
+
+            // Configuração do banco de dados
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
@@ -54,9 +71,9 @@ namespace Child.Growth
 
             app.UseRouting();
 
-            // Configurações de autenticação e autorização (se necessário)
-            // app.UseAuthentication();
-            // app.UseAuthorization();
+            // Configurações de autenticação e autorização
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

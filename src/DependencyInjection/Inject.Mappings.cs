@@ -1,7 +1,7 @@
 using Child.Growth.src.Mappings;
 using Microsoft.EntityFrameworkCore;
 
-namespace Child.Growth.src.Injection
+namespace Child.Growth.src.DependencyInjection
 {
     public class InjectMappings
     {
