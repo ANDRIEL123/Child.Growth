@@ -19,7 +19,7 @@ builder.Services.AddSingleton<ITempDataDictionaryFactory, TempDataDictionaryFact
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Child.Growth", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Child.Growth Project", Version = "v1" });
 
     // Configuração para adicionar o suporte à autenticação Bearer Token
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -27,7 +27,8 @@ builder.Services.AddSwaggerGen(c =>
         In = ParameterLocation.Header,
         Description = "Insira o Token JWT no formato Bearer",
         Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
     });
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {

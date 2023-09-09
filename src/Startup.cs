@@ -1,7 +1,7 @@
 using System.Text;
-using Child.Growth.src.Data;
-using Child.Growth.src.Data.UnitOfWork;
-using Child.Growth.src.DependencyInjection;
+using Child.Growth.src.Infra.Data;
+using Child.Growth.src.Infra.Data.UnitOfWork;
+using Child.Growth.src.Infra.DependencyInjection;
 using Child.Growth.src.Repositories.Base;
 using Child.Growth.src.Repositories.Interfaces.Base;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -41,10 +41,9 @@ namespace Child.Growth
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Authentication:Issuer"],
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:SecretKey"]))
                     };
                 });

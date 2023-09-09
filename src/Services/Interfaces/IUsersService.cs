@@ -6,6 +6,8 @@ namespace Child.Growth.src.Services.Interfaces
     {
         IEnumerable<Users> GetAll();
 
+        object Login(string email, string password);
+
         void Create(Users user);
     }
 }

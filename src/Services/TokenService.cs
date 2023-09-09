@@ -15,19 +15,24 @@ namespace Child.Growth.src.Services
             _configuration = configuration;
         }
 
-        public string GenerateToken(string username)
+        public object GenerateToken(string email)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Authentication:SecretKey"])); // Substitua pela sua chave secreta
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Authentication:SecretKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+            var expiresIn = DateTime.Now.AddHours(1);
+
             var token = new JwtSecurityToken(
-                issuer: _configuration["Authentication:Issuer"],
-                claims: new[] { new Claim(ClaimTypes.Name, username) },
-                expires: DateTime.Now.AddMinutes(60),
+                claims: new[] { new Claim(ClaimTypes.Email, email) },
+                expires: expiresIn,
                 signingCredentials: credentials
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new
+            {
+                accessToken = $"Bearer {new JwtSecurityTokenHandler().WriteToken(token)}",
+                expiresIn
+            };
         }
     }
 }

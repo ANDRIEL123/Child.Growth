@@ -1,4 +1,4 @@
-namespace Child.Growth.src.Data.UnitOfWork
+namespace Child.Growth.src.Infra.Data.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

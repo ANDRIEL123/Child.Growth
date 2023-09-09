@@ -1,4 +1,4 @@
-using Child.Growth.src.Data;
+using Child.Growth.src.Infra.Data;
 using Child.Growth.src.Repositories.Interfaces.Base;
 using Microsoft.EntityFrameworkCore;
 

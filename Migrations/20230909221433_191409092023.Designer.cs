@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Child.Growth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230907060238_20230907030235")]
-    partial class _20230907030235
+    [Migration("20230909221433_191409092023")]
+    partial class _191409092023
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,13 +58,9 @@ namespace Child.Growth.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("password_hash");
-
-                    b.Property<string>("PasswordSalt")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("password_salt");
+                        .HasColumnName("password");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)")

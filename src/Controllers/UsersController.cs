@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Child.Growth.src.Controllers
 {
-    [Route("[controller]")]
-    public class UsersController : Controller
+    [ApiController]
+    [Route("/users")]
+    public class UsersController : ControllerBase
     {
         private readonly ILogger<UsersController> _logger;
 
@@ -24,20 +25,29 @@ namespace Child.Growth.src.Controllers
             _tokenService = tokenService;
         }
 
+        /// <summary>
+        /// Realiza o login na autenticação gerando o JWT Bearer Token
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [HttpGet("login")]
+        [AllowAnonymous]
+        public IActionResult Login(string email, string password)
+        {
+            return Ok(_usersService.Login(email, password));
+        }
+
         [HttpGet]
+        [Route("")]
         [Authorize]
         public List<Users> Get()
         {
             return _usersService.GetAll().ToList();
         }
 
-        [HttpGet("auth")]
-        public string Auth(string email)
-        {
-            return _tokenService.GenerateToken(email);
-        }
-
         [HttpPost]
+        [Route("")]
         public void Create([FromBody] Users user)
         {
             _usersService.Create(user);

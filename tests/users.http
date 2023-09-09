@@ -1,0 +1,9 @@
+@baseUrl = https://localhost:7085
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhbmRyaWVsbWZyaWVkcmljaEBnbWFpbC5jb20iLCJleHAiOjE2OTQyOTc0OTN9.nG2zZppO7c3JcoD-PCQK1Q3vEdV1I7uJNidU9KVrGFo
+
+GET {{baseUrl}}/users/login?email=andrielmfriedrich%40gmail.com&password=admin1
+
+###
+GET {{baseUrl}}/users
+Content-Type: application/json
+Authorization: Bearer {{token}}

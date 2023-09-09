@@ -1,15 +1,10 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using Child.Growth.src.Entities.Base;
 
 namespace Child.Growth.src.Entities
 {
-    public class Users
+    public class Users : EntityBase
     {
-        /// <summary>
-        /// Identificador
-        /// </summary>
-        [Column("id")]
-        public long Id { get; set; }
-
         /// <summary>
         /// Nome
         /// </summary>
@@ -47,27 +42,9 @@ namespace Child.Growth.src.Entities
         public DateTime BirthDate { get; set; }
 
         /// <summary>
-        /// Hash do password
+        /// Senha
         /// </summary>
-        [Column("password_hash")]
-        public string PasswordHash { get; set; }
-
-        /// <summary>
-        /// Salt do password
-        /// </summary>
-        [Column("password_salt")]
-        public string PasswordSalt { get; set; }
-
-        /// <summary>
-        /// Criado em
-        /// </summary>
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; }
-
-        /// <summary>
-        /// Modificado em
-        /// </summary>
-        [Column("modified_at")]
-        public DateTime? ModifiedAt { get; set; }
+        [Column("password")]
+        public string Password { get; set; }
     }
 }
