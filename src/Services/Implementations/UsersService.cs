@@ -1,12 +1,13 @@
 using Child.Growth.src.Infra.Data.UnitOfWork;
 using Child.Growth.src.Entities;
-using Child.Growth.src.Repositories.Interfaces.Base;
 using Child.Growth.src.Services.Interfaces;
 using Child.Growth.src.Infra.Exceptions;
+using Child.Growth.src.Services.Base;
+using Child.Growth.src.Repositories.Base;
 
-namespace Child.Growth.src.Services
+namespace Child.Growth.src.Services.Implementations
 {
-    public class UsersService : IUsersService
+    public class UsersService : ServiceBase<Users>, IUsersService
     {
         private readonly IRepository<Users> _repository;
         private readonly IUnitOfWork _uow;
@@ -16,7 +17,7 @@ namespace Child.Growth.src.Services
             IRepository<Users> repository,
             IUnitOfWork uow,
             ITokenService tokenService
-        )
+        ) : base(repository, uow)
         {
             _repository = repository;
             _uow = uow;
@@ -36,28 +37,6 @@ namespace Child.Growth.src.Services
                 throw new BusinessException("Credenciais invalidas.");
 
             return _tokenService.GenerateToken(email);
-        }
-
-        /// <summary>
-        /// Lista todos os usuários
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Users> GetAll()
-        {
-            var users = _repository.GetAll();
-
-            return users;
-        }
-
-        /// <summary>
-        /// Cria um novo usuário
-        /// </summary>
-        /// <param name="user"></param>
-        public void Create(Users user)
-        {
-            _repository.Add(user);
-
-            _uow.SaveChanges();
         }
 
         /// <summary>

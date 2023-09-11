@@ -3,7 +3,6 @@ using Child.Growth.src.Infra.Data;
 using Child.Growth.src.Infra.Data.UnitOfWork;
 using Child.Growth.src.Infra.DependencyInjection;
 using Child.Growth.src.Repositories.Base;
-using Child.Growth.src.Repositories.Interfaces.Base;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

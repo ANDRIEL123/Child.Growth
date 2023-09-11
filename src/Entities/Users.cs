@@ -3,6 +3,9 @@ using Child.Growth.src.Entities.Base;
 
 namespace Child.Growth.src.Entities
 {
+    /// <summary>
+    /// Usuários
+    /// </summary>
     public class Users : EntityBase
     {
         /// <summary>

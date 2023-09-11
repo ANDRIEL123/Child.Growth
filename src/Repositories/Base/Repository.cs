@@ -1,6 +1,6 @@
 using Child.Growth.src.Infra.Data;
-using Child.Growth.src.Repositories.Interfaces.Base;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Child.Growth.src.Repositories.Base
 {
@@ -13,7 +13,7 @@ namespace Child.Growth.src.Repositories.Base
             _context = context;
         }
 
-        public TEntity GetById(int id)
+        public TEntity GetById(long id)
         {
             return _context.Set<TEntity>().Find(id);
         }
@@ -23,19 +23,20 @@ namespace Child.Growth.src.Repositories.Base
             return _context.Set<TEntity>().ToList();
         }
 
-        public void Add(TEntity entity)
+        public EntityEntry<TEntity> Add(TEntity entity)
         {
-            _context.Set<TEntity>().Add(entity);
+            return _context.Set<TEntity>().Add(entity);
         }
 
-        public void Update(TEntity entity)
+        public EntityEntry<TEntity> Update(TEntity entity)
         {
-            _context.Entry(entity).State = EntityState.Modified;
+            return _context.Set<TEntity>().Update(entity);
         }
 
-        public void Remove(TEntity entity)
+        public EntityEntry<TEntity> Remove(long id)
         {
-            _context.Set<TEntity>().Remove(entity);
+            var entity = GetById(id);
+            return _context.Set<TEntity>().Remove(entity);
         }
     }
 

@@ -1,4 +1,5 @@
 using Child.Growth.src.Entities;
+using Child.Growth.src.Infra.Responses;
 using Child.Growth.src.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,13 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace Child.Growth.src.Controllers
 {
     [ApiController]
-    [Route("/users")]
+    [Route("[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly ILogger<UsersController> _logger;
 
         private readonly IUsersService _usersService;
-        private readonly ITokenService _tokenService;
 
         public UsersController(
             ILogger<UsersController> logger,
@@ -22,7 +22,6 @@ namespace Child.Growth.src.Controllers
         {
             _logger = logger;
             _usersService = usersService;
-            _tokenService = tokenService;
         }
 
         /// <summary>
@@ -39,18 +38,31 @@ namespace Child.Growth.src.Controllers
         }
 
         [HttpGet]
-        [Route("")]
         [Authorize]
         public List<Users> Get()
         {
-            return _usersService.GetAll().ToList();
+            return _usersService.GetAll();
         }
 
         [HttpPost]
-        [Route("")]
-        public void Create([FromBody] Users user)
+        [Authorize]
+        public ResponseBody Create([FromBody] Users user)
         {
-            _usersService.Create(user);
+            return _usersService.Create(user);
+        }
+
+        [HttpPut]
+        [Authorize]
+        public ResponseBody Update([FromBody] Users user)
+        {
+            return _usersService.Update(user);
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public ResponseBody Delete(long id)
+        {
+            return _usersService.Delete(id);
         }
     }
 }

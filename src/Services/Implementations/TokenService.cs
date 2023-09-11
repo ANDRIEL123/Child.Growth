@@ -4,7 +4,7 @@ using System.Text;
 using Child.Growth.src.Services.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Child.Growth.src.Services
+namespace Child.Growth.src.Services.Implementations
 {
     public class TokenService : ITokenService
     {

@@ -1,4 +1,4 @@
-using Child.Growth.src.Services;
+using Child.Growth.src.Services.Implementations;
 using Child.Growth.src.Services.Interfaces;
 
 namespace Child.Growth.src.Infra.DependencyInjection
