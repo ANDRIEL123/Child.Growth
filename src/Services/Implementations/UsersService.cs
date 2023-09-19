@@ -34,7 +34,7 @@ namespace Child.Growth.src.Services.Implementations
         public object Login(string email, string password)
         {
             if (!CheckCredentials(email, password))
-                throw new BusinessException("Credenciais invalidas.");
+                throw new Exception("Credenciais invalidas.");
 
             return _tokenService.GenerateToken(email);
         }
@@ -55,7 +55,7 @@ namespace Child.Growth.src.Services.Implementations
                 )
                 .FirstOrDefault();
 
-            if (user == null)
+            if (user == null || string.IsNullOrEmpty(email))
                 return false;
 
             return true;

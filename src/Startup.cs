@@ -25,11 +25,29 @@ namespace Child.Growth
             // Adicione serviços do ASP.NET Core MVC
             services.AddControllersWithViews();
 
+            // Adiciona filtro de exceção
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(new CustomExceptionFilterAttribute());
+            });
+
             // Registra o repositório no Container de Injeção de Dependência
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             // Registra o Unit of Work no Container de Injeção de Dependência
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Habita cors
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
+            });
 
             // Injeta os serviços
             InjectServices.AddServices(services);
@@ -68,6 +86,12 @@ namespace Child.Growth
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
 
             // Configurações de autenticação e autorização
             app.UseAuthentication();
