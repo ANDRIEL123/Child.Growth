@@ -39,7 +39,7 @@ namespace Child.Growth.src.Controllers
 
         [HttpGet]
         [Authorize]
-        public List<Users> Get()
+        public ResponseBody Get()
         {
             return _usersService.GetAll();
         }

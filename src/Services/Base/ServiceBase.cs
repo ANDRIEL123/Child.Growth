@@ -1,5 +1,6 @@
 using Child.Growth.src.Entities.Base;
 using Child.Growth.src.Infra.Data.UnitOfWork;
+using Child.Growth.src.Infra.Exceptions;
 using Child.Growth.src.Infra.Responses;
 using Child.Growth.src.Repositories.Base;
 
@@ -17,14 +18,26 @@ namespace Child.Growth.src.Services.Base
             _uow = uow;
         }
 
-        public List<T> GetAll()
+        public ResponseBody GetAll()
         {
-            return _repository.GetAll().ToList();
+            var content = _repository.GetAll().ToList();
+
+            return new ResponseBody
+            {
+                Code = 200,
+                Message = "Registros atualizados retornados.",
+                Content = content
+            };
         }
 
-        public T GetById(long id)
+        public ResponseBody GetById(long id)
         {
-            return _repository.GetById(id);
+            return new ResponseBody
+            {
+                Code = 200,
+                Message = "Registro localizado com sucesso.",
+                Content = _repository.GetById(id)
+            };
         }
 
         public ResponseBody Create(T entity)

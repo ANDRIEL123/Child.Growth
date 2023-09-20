@@ -10,8 +10,8 @@ namespace Child.Growth.src.Services.Base
 
         ResponseBody Delete(long id);
 
-        T GetById(long id);
+        ResponseBody GetById(long id);
 
-        List<T> GetAll();
+        ResponseBody GetAll();
     }
 }
