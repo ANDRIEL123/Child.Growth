@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Child.Growth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230909221433_191409092023")]
-    partial class _191409092023
+    [Migration("20230920232315_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,11 +34,11 @@ namespace Child.Growth.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<short>("Active")
-                        .HasColumnType("smallint")
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit")
                         .HasColumnName("active");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("birth_date");
 

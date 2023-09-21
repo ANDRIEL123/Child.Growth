@@ -24,13 +24,13 @@ namespace Child.Growth.src.Entities
         /// Tipo de usuário
         /// </summary>
         [Column("type")]
-        public short Type { get; set; }
+        public short Type { get; set; } = 1;
 
         /// <summary>
         /// Ativo/Inativo
         /// </summary>
         [Column("active")]
-        public short Active { get; set; }
+        public bool Active { get; set; } = true;
 
         /// <summary>
         /// Telefone/Celular
@@ -42,7 +42,7 @@ namespace Child.Growth.src.Entities
         /// Data de Nascimento
         /// </summary>
         [Column("birth_date")]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         /// <summary>
         /// Senha

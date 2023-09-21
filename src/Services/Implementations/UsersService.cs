@@ -4,6 +4,7 @@ using Child.Growth.src.Services.Interfaces;
 using Child.Growth.src.Infra.Exceptions;
 using Child.Growth.src.Services.Base;
 using Child.Growth.src.Repositories.Base;
+using Child.Growth.src.Infra.Responses;
 
 namespace Child.Growth.src.Services.Implementations
 {
@@ -59,6 +60,25 @@ namespace Child.Growth.src.Services.Implementations
                 return false;
 
             return true;
+        }
+
+        /// <summary>
+        /// Verifica se o usuário existe
+        /// </summary>
+        /// <param name="newUser"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public bool CheckIfTheUserExists(Users newUser)
+        {
+            var user = _repository
+                .GetAll()
+                .Where(x => x.Email == newUser?.Email)
+                .FirstOrDefault();
+
+            if (user != null)
+                return true;
+
+            return false;
         }
     }
 }

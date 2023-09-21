@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Child.Growth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230907060238_20230907030235")]
-    partial class _20230907030235
+    [Migration("20230920232744_users")]
+    partial class users
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,11 +34,11 @@ namespace Child.Growth.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<short>("Active")
-                        .HasColumnType("smallint")
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit")
                         .HasColumnName("active");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("birth_date");
 
@@ -58,13 +58,9 @@ namespace Child.Growth.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("password_hash");
-
-                    b.Property<string>("PasswordSalt")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("password_salt");
+                        .HasColumnName("password");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)")

@@ -44,10 +44,26 @@ namespace Child.Growth.src.Controllers
             return _usersService.GetAll();
         }
 
-        [HttpPost]
+        [HttpGet("GetByFilters")]
         [Authorize]
+        public ResponseBody GetByFilters(string filters)
+        {
+            var usersByFilter = _usersService.GetByFilters(filters);
+
+            return new ResponseBody
+            {
+                Code = 200,
+                Message = "Usuário(s) com filtros recuperados",
+                Content = usersByFilter
+            };
+        }
+
+        [HttpPost]
         public ResponseBody Create([FromBody] Users user)
         {
+            if (_usersService.CheckIfTheUserExists(user))
+                throw new Exception("Já existe um usuário com esse e-mail");
+
             return _usersService.Create(user);
         }
 

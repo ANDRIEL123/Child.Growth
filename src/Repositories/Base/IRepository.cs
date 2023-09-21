@@ -6,6 +6,7 @@ namespace Child.Growth.src.Repositories.Base
     {
         TEntity GetById(long id);
         IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> GetByFilters(string filters);
         EntityEntry<TEntity> Add(TEntity entity);
         EntityEntry<TEntity> Update(TEntity entity);
         EntityEntry<TEntity> Remove(long id);

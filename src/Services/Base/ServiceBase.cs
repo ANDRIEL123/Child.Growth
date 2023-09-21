@@ -30,6 +30,11 @@ namespace Child.Growth.src.Services.Base
             };
         }
 
+        public List<T> GetByFilters(string filters)
+        {
+            return _repository.GetByFilters(filters).ToList();
+        }
+
         public ResponseBody GetById(long id)
         {
             return new ResponseBody
@@ -105,7 +110,7 @@ namespace Child.Growth.src.Services.Base
 
         public ResponseBody Delete(long id)
         {
-            if (id == default(long))
+            if (id == default)
                 throw new Exception("Id não informado corretamente.");
 
             try

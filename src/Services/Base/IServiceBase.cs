@@ -13,5 +13,7 @@ namespace Child.Growth.src.Services.Base
         ResponseBody GetById(long id);
 
         ResponseBody GetAll();
+
+        List<T> GetByFilters(string filters);
     }
 }

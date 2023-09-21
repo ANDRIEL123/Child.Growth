@@ -31,11 +31,11 @@ namespace Child.Growth.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<short>("Active")
-                        .HasColumnType("smallint")
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit")
                         .HasColumnName("active");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("birth_date");
 
