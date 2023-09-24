@@ -30,19 +30,21 @@ namespace Child.Growth.src.Repositories.Base
             var decodedFilters = System.Net.WebUtility.UrlDecode(filters);
             var parsedFilters = JsonConvert.DeserializeObject<List<FilterModel>>(decodedFilters);
 
-            IQueryable<TEntity> query = _context.Set<TEntity>(); // Substitua 'Entidades' pelo nome da sua DbSet
+            IQueryable<TEntity> query = _context.Set<TEntity>();
 
             foreach (var filter in parsedFilters)
             {
                 switch (filter.Operation)
                 {
-                    case "equals":
+                    case "Equals":
                         query = query.Where(e => EF.Property<string>(e, filter.PropertyName) == filter.Value);
                         break;
-                    case "not equals":
+                    case "NotEquals":
                         query = query.Where(e => EF.Property<string>(e, filter.PropertyName) != filter.Value);
                         break;
-                    // Adicione outros casos conforme necessário (por exemplo, "maiorIgual", "menorIgual", etc.)
+                    case "Contains":
+                        query = query.Where(e => EF.Property<string>(e, filter.PropertyName).Contains(filter.Value));
+                        break;
                     default:
                         break;
                 }

@@ -46,16 +46,11 @@ namespace Child.Growth.src.Controllers
 
         [HttpGet("GetByFilters")]
         [Authorize]
-        public ResponseBody GetByFilters(string filters)
+        public List<Users> GetByFilters(string filters)
         {
             var usersByFilter = _usersService.GetByFilters(filters);
 
-            return new ResponseBody
-            {
-                Code = 200,
-                Message = "Usuário(s) com filtros recuperados",
-                Content = usersByFilter
-            };
+            return usersByFilter;
         }
 
         [HttpPost]
