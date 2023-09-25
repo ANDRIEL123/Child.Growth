@@ -35,6 +35,10 @@ namespace Child.Growth.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("active");
 
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("avatar");
+
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("birth_date");

@@ -24,6 +24,7 @@ namespace Child.Growth.Migrations
                     phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     birth_date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    avatar = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
                     modified_at = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },

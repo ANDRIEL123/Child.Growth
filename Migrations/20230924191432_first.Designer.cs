@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Child.Growth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230920232744_users")]
-    partial class users
+    [Migration("20230924191432_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,10 @@ namespace Child.Growth.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit")
                         .HasColumnName("active");
+
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("avatar");
 
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2")

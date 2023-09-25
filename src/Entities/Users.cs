@@ -49,5 +49,11 @@ namespace Child.Growth.src.Entities
         /// </summary>
         [Column("password")]
         public string Password { get; set; }
+
+        /// <summary>
+        /// Imagem de perfil do usuário
+        /// </summary>
+        [Column("avatar")]
+        public string Avatar { get; set; }
     }
 }
