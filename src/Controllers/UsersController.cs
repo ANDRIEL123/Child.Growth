@@ -69,7 +69,7 @@ namespace Child.Growth.src.Controllers
             return _usersService.Update(user);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [Authorize]
         public ResponseBody Delete(long id)
         {

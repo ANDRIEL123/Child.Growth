@@ -78,7 +78,6 @@ namespace Child.Growth.src.Services.Base
 
         public ResponseBody Update(T entity)
         {
-
             if (entity == null)
                 throw new Exception($"Ocorreu um erro ao criar {entity.GetType().FullName}, entidade está null");
 

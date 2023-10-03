@@ -8,6 +8,7 @@ namespace Child.Growth.src.Infra.DependencyInjection
         public static void Add(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UsersMapping());
+            modelBuilder.ApplyConfiguration(new ChildrenMapping());
         }
     }
 }

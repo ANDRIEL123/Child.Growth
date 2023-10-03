@@ -8,6 +8,7 @@ namespace Child.Growth.src.Infra.DependencyInjection
         public static void AddServices(IServiceCollection services)
         {
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IChildrenService, ChildrenService>();
             services.AddScoped<ITokenService, TokenService>();
         }
     }
