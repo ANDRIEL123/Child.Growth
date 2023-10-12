@@ -10,6 +10,8 @@ namespace Child.Growth.src.Infra.DependencyInjection
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IChildrenService, ChildrenService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IPatientConsultationService, PatientConsultationService>();
+            services.AddScoped<IResponsibleService, ResponsibleService>();
         }
     }
 }

@@ -4,6 +4,7 @@ using Child.Growth.src.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Child.Growth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231009222124_addPatientConsultationDate")]
+    partial class addPatientConsultationDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,12 +58,7 @@ namespace Child.Growth.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
-                    b.Property<long>("ResponsibleId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ResponsibleId");
 
                     b.ToTable("children", (string)null);
                 });
@@ -111,48 +109,6 @@ namespace Child.Growth.Migrations
                     b.HasIndex("ChildrenId");
 
                     b.ToTable("patient_consultation", (string)null);
-                });
-
-            modelBuilder.Entity("Child.Growth.src.Entities.Responsible", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("birthDate");
-
-                    b.Property<string>("Cpf")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("cpf");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_at");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("email");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("modified_at");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("name");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("phone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("responsible", (string)null);
                 });
 
             modelBuilder.Entity("Child.Growth.src.Entities.Users", b =>
@@ -209,17 +165,6 @@ namespace Child.Growth.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("Child.Growth.src.Entities.Children", b =>
-                {
-                    b.HasOne("Child.Growth.src.Entities.Responsible", "Responsible")
-                        .WithMany("Children")
-                        .HasForeignKey("ResponsibleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Responsible");
-                });
-
             modelBuilder.Entity("Child.Growth.src.Entities.PatientConsultation", b =>
                 {
                     b.HasOne("Child.Growth.src.Entities.Children", "Children")
@@ -234,11 +179,6 @@ namespace Child.Growth.Migrations
             modelBuilder.Entity("Child.Growth.src.Entities.Children", b =>
                 {
                     b.Navigation("Consultations");
-                });
-
-            modelBuilder.Entity("Child.Growth.src.Entities.Responsible", b =>
-                {
-                    b.Navigation("Children");
                 });
 #pragma warning restore 612, 618
         }

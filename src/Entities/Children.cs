@@ -31,5 +31,23 @@ namespace Child.Growth.src.Entities
         /// </summary>
         [Column("avatar")]
         public string Avatar { get; set; }
+
+        /// <summary>
+        /// Responsável pela criança
+        /// </summary>
+        [Column("responsible_id")]
+        public long ResponsibleId { get; set; }
+
+        #region References
+
+        public virtual Responsible Responsible { get; set; }
+
+        #endregion
+
+        #region Collections
+
+        public virtual ICollection<PatientConsultation> Consultations { get; set; }
+
+        #endregion
     }
 }

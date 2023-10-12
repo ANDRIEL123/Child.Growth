@@ -9,6 +9,8 @@ namespace Child.Growth.src.Infra.DependencyInjection
         {
             modelBuilder.ApplyConfiguration(new UsersMapping());
             modelBuilder.ApplyConfiguration(new ChildrenMapping());
+            modelBuilder.ApplyConfiguration(new PatientConsultationMapping());
+            modelBuilder.ApplyConfiguration(new ResponsibleMapping());
         }
     }
 }
