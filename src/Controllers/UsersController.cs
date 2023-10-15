@@ -54,19 +54,16 @@ namespace Child.Growth.src.Controllers
         }
 
         [HttpPost]
-        public ResponseBody Create([FromBody] Users user)
+        public ResponseBody Create([FromBody] Users entity)
         {
-            if (_usersService.CheckIfTheUserExists(user))
-                throw new Exception("Já existe um usuário com esse e-mail");
-
-            return _usersService.Create(user);
+            return _usersService.Create(entity);
         }
 
         [HttpPut]
         [Authorize]
-        public ResponseBody Update([FromBody] Users user)
+        public ResponseBody Update([FromBody] Users entity)
         {
-            return _usersService.Update(user);
+            return _usersService.Update(entity);
         }
 
         [HttpDelete("{id}")]

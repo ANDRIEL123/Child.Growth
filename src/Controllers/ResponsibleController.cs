@@ -48,23 +48,23 @@ namespace Child.Growth.src.Controllers
         }
 
         [HttpPost]
-        public ResponseBody Create([FromBody] Responsible user)
+        public ResponseBody Create([FromBody] Responsible entity)
         {
-            return _responsibleService.Create(user);
+            return _responsibleService.CreateUserAndResponsible(entity);
         }
 
         [HttpPut]
         [Authorize]
-        public ResponseBody Update([FromBody] Responsible user)
+        public ResponseBody Update([FromBody] Responsible entity)
         {
-            return _responsibleService.Update(user);
+            return _responsibleService.Update(entity);
         }
 
         [HttpDelete("{id}")]
         [Authorize]
         public ResponseBody Delete(long id)
         {
-            return _responsibleService.Delete(id);
+            return _responsibleService.DeleteUserAndResponsible(id);
         }
     }
 }

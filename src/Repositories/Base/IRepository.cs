@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Child.Growth.src.Repositories.Base
@@ -6,6 +7,7 @@ namespace Child.Growth.src.Repositories.Base
     {
         TEntity GetById(long id);
         IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> Query(Expression<Func<TEntity, bool>> filterExpression);
         IEnumerable<TEntity> GetByFilters(string filters);
         EntityEntry<TEntity> Add(TEntity entity);
         EntityEntry<TEntity> Update(TEntity entity);

@@ -25,6 +25,14 @@ namespace Child.Growth.src.Services.Implementations
             _tokenService = tokenService;
         }
 
+        public new ResponseBody Create(Users entity)
+        {
+            if (CheckIfTheUserExists(entity))
+                throw new Exception("Já existe um usuário com esse e-mail");
+
+            return base.Create(entity);
+        }
+
         /// <summary>
         /// Realiza o login na aplicação retornando o Token JWT Bearer
         /// </summary>

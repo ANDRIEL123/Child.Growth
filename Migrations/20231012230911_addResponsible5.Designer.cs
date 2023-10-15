@@ -4,6 +4,7 @@ using Child.Growth.src.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Child.Growth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231012230911_addResponsible5")]
+    partial class addResponsible5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,8 +102,8 @@ namespace Child.Growth.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("modified_at");
 
-                    b.Property<string>("Observations")
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<float>("Observations")
+                        .HasColumnType("real")
                         .HasColumnName("observations");
 
                     b.Property<float>("Weight")
@@ -151,13 +154,7 @@ namespace Child.Growth.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("phone");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("user_id");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("responsible", (string)null);
                 });
@@ -207,8 +204,8 @@ namespace Child.Growth.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("phone");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int")
+                    b.Property<short>("Type")
+                        .HasColumnType("smallint")
                         .HasColumnName("type");
 
                     b.HasKey("Id");
@@ -238,17 +235,6 @@ namespace Child.Growth.Migrations
                     b.Navigation("Children");
                 });
 
-            modelBuilder.Entity("Child.Growth.src.Entities.Responsible", b =>
-                {
-                    b.HasOne("Child.Growth.src.Entities.Users", "User")
-                        .WithMany("Responsible")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Child.Growth.src.Entities.Children", b =>
                 {
                     b.Navigation("Consultations");
@@ -257,11 +243,6 @@ namespace Child.Growth.Migrations
             modelBuilder.Entity("Child.Growth.src.Entities.Responsible", b =>
                 {
                     b.Navigation("Children");
-                });
-
-            modelBuilder.Entity("Child.Growth.src.Entities.Users", b =>
-                {
-                    b.Navigation("Responsible");
                 });
 #pragma warning restore 612, 618
         }

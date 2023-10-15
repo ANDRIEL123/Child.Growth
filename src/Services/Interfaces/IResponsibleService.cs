@@ -7,5 +7,9 @@ namespace Child.Growth.src.Services.Interfaces
     public interface IResponsibleService : IServiceBase<Responsible>
     {
         ResponseBody GetOptions();
+
+        ResponseBody CreateUserAndResponsible(Responsible responsible);
+
+        ResponseBody DeleteUserAndResponsible(long responsibleId);
     }
 }

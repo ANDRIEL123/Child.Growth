@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Child.Growth.src.Infra.Data;
 using Child.Growth.src.Infra.Models;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,12 @@ namespace Child.Growth.src.Repositories.Base
         public IEnumerable<TEntity> GetAll()
         {
             return _context.Set<TEntity>().ToList();
+        }
+
+        public IEnumerable<TEntity> Query(Expression<Func<TEntity, bool>> filterExpression)
+        {
+            return _context.Set<TEntity>()
+                .Where(filterExpression).ToList();
         }
 
         public IEnumerable<TEntity> GetByFilters(string filters)

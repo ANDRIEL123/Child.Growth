@@ -36,7 +36,7 @@ namespace Child.Growth.src.Entities
         /// Nome
         /// </summary>
         [Column("observations")]
-        public float Observations { get; set; }
+        public string Observations { get; set; }
 
         /// <summary>
         /// Id da criança

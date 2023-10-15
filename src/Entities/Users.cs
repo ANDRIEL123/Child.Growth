@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Child.Growth.src.Entities.Base;
+using Child.Growth.src.Infra.Enums;
 
 namespace Child.Growth.src.Entities
 {
@@ -24,7 +25,7 @@ namespace Child.Growth.src.Entities
         /// Tipo de usuário
         /// </summary>
         [Column("type")]
-        public short Type { get; set; } = 1;
+        public UserTypeEnum Type { get; set; } = UserTypeEnum.Doctor;
 
         /// <summary>
         /// Ativo/Inativo
@@ -55,5 +56,11 @@ namespace Child.Growth.src.Entities
         /// </summary>
         [Column("avatar")]
         public string Avatar { get; set; }
+
+        #region Collections
+
+        public virtual ICollection<Responsible> Responsible { get; set; }
+
+        #endregion
     }
 }

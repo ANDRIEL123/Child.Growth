@@ -23,7 +23,11 @@ namespace Child.Growth
             // Configurações gerais
 
             // Adicione serviços do ASP.NET Core MVC
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                });
 
             // Adiciona filtro de exceção
             services.AddControllers(options =>

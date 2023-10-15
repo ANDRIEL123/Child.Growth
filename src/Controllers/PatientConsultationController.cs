@@ -40,17 +40,24 @@ namespace Child.Growth.src.Controllers
             return PatientConsultationByFilter;
         }
 
-        [HttpPost]
-        public ResponseBody Create([FromBody] PatientConsultation user)
+        [HttpGet("GetConsultsByUserId")]
+        [Authorize]
+        public ResponseBody GetConsultsByUserId(long userId)
         {
-            return _patientConsultationService.Create(user);
+            return _patientConsultationService.GetConsultsByUserId(userId);
+        }
+
+        [HttpPost]
+        public ResponseBody Create([FromBody] PatientConsultation entity)
+        {
+            return _patientConsultationService.Create(entity);
         }
 
         [HttpPut]
         [Authorize]
-        public ResponseBody Update([FromBody] PatientConsultation user)
+        public ResponseBody Update([FromBody] PatientConsultation entity)
         {
-            return _patientConsultationService.Update(user);
+            return _patientConsultationService.Update(entity);
         }
 
         [HttpDelete("{id}")]

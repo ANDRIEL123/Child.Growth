@@ -38,6 +38,18 @@ namespace Child.Growth.src.Entities
         [Column("phone")]
         public string Phone { get; set; }
 
+        /// <summary>
+        /// Id do usuário
+        /// </summary>
+        [Column("user_id")]
+        public long UserId { get; set; }
+
+        #region References
+
+        public virtual Users User { get; set; }
+
+        #endregion
+
         #region Collections
 
         public virtual ICollection<Children> Children { get; set; }

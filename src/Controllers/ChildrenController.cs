@@ -48,16 +48,16 @@ namespace Child.Growth.src.Controllers
 
         [HttpPost]
         [Authorize]
-        public ResponseBody Create([FromBody] Children user)
+        public ResponseBody Create([FromBody] Children entity)
         {
-            return _childrenService.Create(user);
+            return _childrenService.Create(entity);
         }
 
         [HttpPut]
         [Authorize]
-        public ResponseBody Update([FromBody] Children user)
+        public ResponseBody Update([FromBody] Children entity)
         {
-            return _childrenService.Update(user);
+            return _childrenService.Update(entity);
         }
 
         [HttpDelete("{id}")]
