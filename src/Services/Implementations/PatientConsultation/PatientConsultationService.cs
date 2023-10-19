@@ -10,12 +10,15 @@ namespace Child.Growth.src.Services.Implementations
     public partial class PatientConsultationService : ServiceBase<PatientConsultation>, IPatientConsultationService
     {
         private readonly IRepository<PatientConsultation> _repository;
+        private readonly IRepository<Children> _childrenRepository;
         public PatientConsultationService(
             IRepository<PatientConsultation> repository,
+            IRepository<Children> childrenRepository,
             IUnitOfWork uow
         ) : base(repository, uow)
         {
             _repository = repository;
+            _childrenRepository = childrenRepository;
         }
 
         /// <summary>

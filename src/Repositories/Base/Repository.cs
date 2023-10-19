@@ -29,7 +29,8 @@ namespace Child.Growth.src.Repositories.Base
         public IEnumerable<TEntity> Query(Expression<Func<TEntity, bool>> filterExpression)
         {
             return _context.Set<TEntity>()
-                .Where(filterExpression).ToList();
+                .Where(filterExpression)
+                .ToList();
         }
 
         public IEnumerable<TEntity> GetByFilters(string filters)

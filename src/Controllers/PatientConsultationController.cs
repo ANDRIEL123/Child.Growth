@@ -1,4 +1,5 @@
 using Child.Growth.src.Entities;
+using Child.Growth.src.Infra.DTO;
 using Child.Growth.src.Infra.Responses;
 using Child.Growth.src.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -45,6 +46,20 @@ namespace Child.Growth.src.Controllers
         public ResponseBody GetConsultsByUserId(long userId)
         {
             return _patientConsultationService.GetConsultsByUserId(userId);
+        }
+
+        [HttpGet("GetComparativeData")]
+        [Authorize]
+        public List<ComparativeData> GetComparativeData(long childrenId)
+        {
+            return _patientConsultationService.GetComparativeData(childrenId);
+        }
+
+        [HttpGet("GetComparativeAveragePercentileWeight")]
+        [Authorize]
+        public IEnumerable<ComparativeAveragePercentile> GetComparativeAveragePercentileWeight(long childrenId)
+        {
+            return _patientConsultationService.GetComparativeAveragePercentileWeight(childrenId);
         }
 
         [HttpPost]
