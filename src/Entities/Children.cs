@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Child.Growth.src.Entities.Base;
+using Child.Growth.src.Infra.Enums;
 
 namespace Child.Growth.src.Entities
 {
@@ -25,6 +26,12 @@ namespace Child.Growth.src.Entities
         /// </summary>
         [Column("birth_date")]
         public DateTime? BirthDate { get; set; }
+
+        /// <summary>
+        /// Gênero
+        /// </summary>
+        [Column("gender")]
+        public GenderEnum Gender { get; set; }
 
         /// <summary>
         /// Imagem de perfil

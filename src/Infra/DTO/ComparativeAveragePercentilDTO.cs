@@ -1,6 +1,6 @@
 namespace Child.Growth.src.Infra.DTO
 {
-    public class ComparativeAveragePercentile
+    public class ComparativeAveragePercentileDTO
     {
         public string Month { get; set; }
 

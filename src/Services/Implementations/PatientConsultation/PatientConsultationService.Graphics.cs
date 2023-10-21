@@ -3,6 +3,7 @@ using Child.Growth.src.Services.Interfaces;
 using Child.Growth.src.Services.Base;
 using Child.Growth.src.Infra.DTO;
 using Child.Growth.src.Infra.Exceptions;
+using Child.Growth.src.Infra.Enums;
 
 namespace Child.Growth.src.Services.Implementations
 {
@@ -36,8 +37,9 @@ namespace Child.Growth.src.Services.Implementations
         /// </summary>
         /// <param name="childrenId"></param>
         /// <returns></returns>
-        public IEnumerable<ComparativeAveragePercentile> GetComparativeAveragePercentileWeight(
-            long childrenId
+        public IEnumerable<ComparativeAveragePercentileDTO> GetComparativeAveragePercentile(
+            long childrenId,
+            ChartTypeEnum chartType
         )
         {
             var children = _childrenRepository
@@ -47,38 +49,29 @@ namespace Child.Growth.src.Services.Implementations
             if (children == null)
                 throw new BusinessException("Paciente não localizado.");
 
-            var childrenMonthsOfLife = GetLifeTimeInMonths(children.BirthDate);
-            var weightAverages = GetAveragePercentile("DataSets\\Boys\\tab_wfa_boys_p_0_5.xlsx");
-
-            var consults = _repository
-                .Query(x => x.ChildrenId == childrenId)
-                .OrderByDescending(x => x.Date)
-                .Take(10)
-                .GroupBy(x => x.Date.Month)
-                .Select(x => new
-                {
-                    Month = x.Key,
-                    x.Last().Date.Year,
-                    x.Last().Weight
-                })
-                .Reverse()
-                .ToList();
-
-            if (childrenMonthsOfLife > (12 * 5))
-                throw new BusinessException("São comparados somente pacientes de até 5 anos");
+            var averages = GetChartDataByType(children.Gender, chartType);
+            var consults = GetConsultsByChartType(childrenId, chartType);
 
             foreach (var consult in consults)
             {
-                var average = weightAverages
-                    .Where(x => x.Month == consult.Month)
+                var childrenMonthsOfLifeInConsult = GetLifeTimeInMonthsAtConsult(
+                    children.BirthDate,
+                    consult.Date
+                );
+
+                if (childrenMonthsOfLifeInConsult > (12 * 5))
+                    throw new BusinessException($"São comparados somente pacientes de até 5 anos, na consulta do dia {consult.Date:dd/MM/yyyy} o paciente possuí mais: {childrenMonthsOfLifeInConsult} meses.");
+
+                var average = averages
+                    .Where(x => x.Month == childrenMonthsOfLifeInConsult)
                     .Select(x => x.Average)
                     .FirstOrDefault();
 
-                var comparativeAverage = new ComparativeAveragePercentile
+                var comparativeAverage = new ComparativeAveragePercentileDTO
                 {
-                    Month = $"{consult.Month:00}/{consult.Year}",
+                    Month = consult.Month,
                     Average = average,
-                    PatientValue = consult.Weight
+                    PatientValue = consult.PatientValue
                 };
 
                 yield return comparativeAverage;

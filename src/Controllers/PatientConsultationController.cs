@@ -1,5 +1,6 @@
 using Child.Growth.src.Entities;
 using Child.Growth.src.Infra.DTO;
+using Child.Growth.src.Infra.Enums;
 using Child.Growth.src.Infra.Responses;
 using Child.Growth.src.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -48,18 +49,21 @@ namespace Child.Growth.src.Controllers
             return _patientConsultationService.GetConsultsByUserId(userId);
         }
 
-        [HttpGet("GetComparativeData")]
+        [HttpGet("GetGraphComparativeData")]
         [Authorize]
-        public List<ComparativeData> GetComparativeData(long childrenId)
+        public List<ComparativeData> GetGraphComparativeData(long childrenId)
         {
             return _patientConsultationService.GetComparativeData(childrenId);
         }
 
-        [HttpGet("GetComparativeAveragePercentileWeight")]
+        [HttpGet("GetComparativeAveragePercentile")]
         [Authorize]
-        public IEnumerable<ComparativeAveragePercentile> GetComparativeAveragePercentileWeight(long childrenId)
+        public IEnumerable<ComparativeAveragePercentileDTO> GetComparativeAveragePercentile(
+            long childrenId,
+            ChartTypeEnum chartType
+        )
         {
-            return _patientConsultationService.GetComparativeAveragePercentileWeight(childrenId);
+            return _patientConsultationService.GetComparativeAveragePercentile(childrenId, chartType);
         }
 
         [HttpPost]
