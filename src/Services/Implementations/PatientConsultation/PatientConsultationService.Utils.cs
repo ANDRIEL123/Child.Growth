@@ -108,7 +108,7 @@ namespace Child.Growth.src.Services.Implementations
         /// </summary>
         /// <param name="chartType"></param>
         /// <returns></returns>
-        private string GetFolderNameByChartType(ChartTypeEnum chartType)
+        private static string GetFolderNameByChartType(ChartTypeEnum chartType)
         {
             switch (chartType)
             {

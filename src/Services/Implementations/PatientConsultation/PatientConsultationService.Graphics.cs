@@ -62,6 +62,7 @@ namespace Child.Growth.src.Services.Implementations
                 if (childrenMonthsOfLifeInConsult > (12 * 5))
                     throw new BusinessException($"São comparados somente pacientes de até 5 anos, na consulta do dia {consult.Date:dd/MM/yyyy} o paciente possuí mais: {childrenMonthsOfLifeInConsult} meses.");
 
+                // Compara o tempo de vida em meses do paciente com os dados das planilhas
                 var average = averages
                     .Where(x => x.Month == childrenMonthsOfLifeInConsult)
                     .Select(x => x.Average)

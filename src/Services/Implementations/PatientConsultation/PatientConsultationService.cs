@@ -22,6 +22,19 @@ namespace Child.Growth.src.Services.Implementations
         }
 
         /// <summary>
+        /// Retorna as consultas ordenadas pela data mais recente
+        /// </summary>
+        /// <param name="filters"></param>
+        /// <returns></returns>
+        public new List<PatientConsultation> GetByFilters(string filters)
+        {
+            return base
+                .GetByFilters(filters)
+                .OrderByDescending(x => x.Date)
+                .ToList();
+        }
+
+        /// <summary>
         /// Retorna os dados das consultas de um usuário 
         /// vinculado a um responsável vinculado a criança
         /// </summary>

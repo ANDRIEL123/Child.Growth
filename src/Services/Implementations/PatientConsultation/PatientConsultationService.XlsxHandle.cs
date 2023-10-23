@@ -13,7 +13,7 @@ namespace Child.Growth.src.Services.Implementations
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        private List<Percentiles> GetAveragePercentile(string filePath)
+        private static List<Percentiles> GetAveragePercentile(string filePath)
         {
             var percentiles = new List<Percentiles>();
 
