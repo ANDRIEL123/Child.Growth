@@ -87,18 +87,18 @@ namespace Child.Growth.src.Services.Implementations
         /// <param name="gender"></param>
         /// <param name="chartType"></param>
         /// <returns></returns>
-        private List<Percentiles> GetChartDataByType(
+        private List<PercentilesDTO> GetChartDataByType(
             GenderEnum gender,
             ChartTypeEnum chartType
         )
         {
             var folderName = GetFolderNameByChartType(chartType);
-            List<Percentiles> averages;
+            List<PercentilesDTO> averages;
 
             if (gender == GenderEnum.Male)
-                averages = GetAveragePercentile($"DataSets\\Boys\\{folderName}\\0_5.xlsx");
+                averages = GetAveragePercentile($"DataSets\\Boys\\percentiles\\{folderName}\\0_5.xlsx");
             else
-                averages = GetAveragePercentile($"DataSets\\Girls\\{folderName}\\0_5.xlsx");
+                averages = GetAveragePercentile($"DataSets\\Girls\\percentiles\\{folderName}\\0_5.xlsx");
 
             return averages;
         }
@@ -110,17 +110,13 @@ namespace Child.Growth.src.Services.Implementations
         /// <returns></returns>
         private static string GetFolderNameByChartType(ChartTypeEnum chartType)
         {
-            switch (chartType)
+            return chartType switch
             {
-                case ChartTypeEnum.Weight:
-                    return "weight";
-                case ChartTypeEnum.Height:
-                    return "height";
-                case ChartTypeEnum.CephalicPerimeter:
-                    return "cephalic_perimeter";
-                default:
-                    return string.Empty;
-            }
+                ChartTypeEnum.Weight => "weight",
+                ChartTypeEnum.Height => "height",
+                ChartTypeEnum.CephalicPerimeter => "cephalic_perimeter",
+                _ => string.Empty,
+            };
         }
     }
 }

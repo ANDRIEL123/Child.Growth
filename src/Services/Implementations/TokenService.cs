@@ -15,7 +15,7 @@ namespace Child.Growth.src.Services.Implementations
             _configuration = configuration;
         }
 
-        public object GenerateToken(string email)
+        public object GenerateToken(string email, string role)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Authentication:SecretKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -23,7 +23,11 @@ namespace Child.Growth.src.Services.Implementations
             var expiresIn = DateTime.Now.AddHours(1);
 
             var token = new JwtSecurityToken(
-                claims: new[] { new Claim(ClaimTypes.Email, email) },
+                claims: new[]
+                {
+                    new Claim(ClaimTypes.Email, email),
+                    new Claim(ClaimTypes.Role, role)
+                },
                 expires: expiresIn,
                 signingCredentials: credentials
             );

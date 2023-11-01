@@ -24,14 +24,14 @@ namespace Child.Growth.src.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody Get()
         {
             return _responsibleService.GetAll();
         }
 
         [HttpGet("GetByFilters")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public List<Responsible> GetByFilters(string filters)
         {
             var responsibleByFilter = _responsibleService.GetByFilters(filters);
@@ -40,7 +40,7 @@ namespace Child.Growth.src.Controllers
         }
 
         [HttpGet("GetOptions")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody GetOptions()
         {
             return _responsibleService
@@ -54,14 +54,14 @@ namespace Child.Growth.src.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody Update([FromBody] Responsible entity)
         {
             return _responsibleService.Update(entity);
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody Delete(long id)
         {
             return _responsibleService.DeleteUserAndResponsible(id);

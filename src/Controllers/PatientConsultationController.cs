@@ -12,29 +12,24 @@ namespace Child.Growth.src.Controllers
     [Route("[controller]")]
     public class PatientConsultationController : ControllerBase
     {
-        private readonly ILogger<PatientConsultationController> _logger;
-
         private readonly IPatientConsultationService _patientConsultationService;
 
         public PatientConsultationController(
-            ILogger<PatientConsultationController> logger,
-            IPatientConsultationService patientConsultationService,
-            ITokenService tokenService
+            IPatientConsultationService patientConsultationService
         )
         {
-            _logger = logger;
             _patientConsultationService = patientConsultationService;
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody Get()
         {
             return _patientConsultationService.GetAll();
         }
 
         [HttpGet("GetByFilters")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public List<PatientConsultation> GetByFilters(string filters)
         {
             var PatientConsultationByFilter = _patientConsultationService.GetByFilters(filters);
@@ -43,21 +38,21 @@ namespace Child.Growth.src.Controllers
         }
 
         [HttpGet("GetConsultsByUserId")]
-        [Authorize]
+        [Authorize(Roles = "Doctor,Responsible")]
         public ResponseBody GetConsultsByUserId(long userId)
         {
             return _patientConsultationService.GetConsultsByUserId(userId);
         }
 
         [HttpGet("GetGraphComparativeData")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public List<ComparativeData> GetGraphComparativeData(long childrenId)
         {
             return _patientConsultationService.GetComparativeData(childrenId);
         }
 
         [HttpGet("GetComparativeAveragePercentile")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public IEnumerable<ComparativeAveragePercentileDTO> GetComparativeAveragePercentile(
             long childrenId,
             ChartTypeEnum chartType
@@ -73,14 +68,14 @@ namespace Child.Growth.src.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody Update([FromBody] PatientConsultation entity)
         {
             return _patientConsultationService.Update(entity);
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody Delete(long id)
         {
             return _patientConsultationService.Delete(id);

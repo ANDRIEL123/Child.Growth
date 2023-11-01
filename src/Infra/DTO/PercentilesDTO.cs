@@ -1,6 +1,6 @@
 namespace Child.Growth.src.Infra.DTO
 {
-    public class Percentiles
+    public class PercentilesDTO
     {
         public int Month { get; set; }
 

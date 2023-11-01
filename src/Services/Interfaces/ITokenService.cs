@@ -2,6 +2,6 @@ namespace Child.Growth.src.Services.Interfaces
 {
     public interface ITokenService
     {
-        object GenerateToken(string email);
+        object GenerateToken(string email, string role);
     }
 }

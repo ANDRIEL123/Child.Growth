@@ -45,7 +45,7 @@ namespace Child.Growth.src.Controllers
         }
 
         [HttpGet("GetByFilters")]
-        [Authorize]
+        [Authorize(Roles = "Doctor, Responsible")]
         public List<Users> GetByFilters(string filters)
         {
             var usersByFilter = _usersService.GetByFilters(filters);
@@ -60,14 +60,14 @@ namespace Child.Growth.src.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody Update([FromBody] Users entity)
         {
             return _usersService.Update(entity);
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody Delete(long id)
         {
             return _usersService.Delete(id);

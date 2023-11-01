@@ -24,21 +24,21 @@ namespace Child.Growth.src.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody Get()
         {
             return _childrenService.GetAll();
         }
 
         [HttpGet("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody GetById(long id)
         {
             return _childrenService.GetById(id);
         }
 
         [HttpGet("GetByFilters")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public List<Children> GetByFilters(string filters)
         {
             var ChildrenByFilter = _childrenService.GetByFilters(filters);
@@ -47,21 +47,21 @@ namespace Child.Growth.src.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody Create([FromBody] Children entity)
         {
             return _childrenService.Create(entity);
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody Update([FromBody] Children entity)
         {
             return _childrenService.Update(entity);
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public ResponseBody Delete(long id)
         {
             return _childrenService.Delete(id);

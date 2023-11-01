@@ -42,10 +42,9 @@ namespace Child.Growth.src.Services.Implementations
         /// <exception cref="BusinessException"></exception>
         public object Login(string email, string password)
         {
-            if (!CheckCredentials(email, password))
-                throw new Exception("Credenciais invalidas.");
+            var user = CheckCredentials(email, password);
 
-            return _tokenService.GenerateToken(email);
+            return _tokenService.GenerateToken(email, user.Type.ToString());
         }
 
         /// <summary>
@@ -54,7 +53,7 @@ namespace Child.Growth.src.Services.Implementations
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public bool CheckCredentials(string email, string password)
+        public Users CheckCredentials(string email, string password)
         {
             var user = _repository
                 .GetAll()
@@ -65,9 +64,9 @@ namespace Child.Growth.src.Services.Implementations
                 .FirstOrDefault();
 
             if (user == null || string.IsNullOrEmpty(email))
-                return false;
+                throw new Exception("Credenciais invalidas.");
 
-            return true;
+            return user;
         }
 
         /// <summary>
