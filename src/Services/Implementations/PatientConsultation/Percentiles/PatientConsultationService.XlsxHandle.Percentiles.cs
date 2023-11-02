@@ -13,9 +13,9 @@ namespace Child.Growth.src.Services.Implementations
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        private static List<Percentiles> GetAveragePercentile(string filePath)
+        private static List<PercentilesDTO> GetAveragePercentile(string filePath)
         {
-            var percentiles = new List<Percentiles>();
+            var percentiles = new List<PercentilesDTO>();
 
             using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
             using var reader = ExcelReaderFactory.CreateReader(stream);
@@ -30,7 +30,7 @@ namespace Child.Growth.src.Services.Implementations
                     var month = Convert.ToInt32(reader.GetValue(0)) + 1;
                     var average = Convert.ToSingle(reader.GetValue(11));
 
-                    var percentil = new Percentiles
+                    var percentil = new PercentilesDTO
                     {
                         Month = month,
                         Average = average

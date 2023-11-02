@@ -87,7 +87,7 @@ namespace Child.Growth.src.Services.Implementations
         /// <param name="gender"></param>
         /// <param name="chartType"></param>
         /// <returns></returns>
-        private List<PercentilesDTO> GetChartDataByType(
+        private List<PercentilesDTO> GetChartDataAverageByType(
             GenderEnum gender,
             ChartTypeEnum chartType
         )
@@ -101,6 +101,29 @@ namespace Child.Growth.src.Services.Implementations
                 averages = GetAveragePercentile($"DataSets\\Girls\\percentiles\\{folderName}\\0_5.xlsx");
 
             return averages;
+        }
+
+        /// <summary>
+        /// Retorna os dados da planilha com base no tipo de gráfico
+        /// Peso, altura e perímetro cefálico
+        /// </summary>
+        /// <param name="gender"></param>
+        /// <param name="chartType"></param>
+        /// <returns></returns>
+        private List<ZScoresDTO> GetChartDataZScoreByType(
+            GenderEnum gender,
+            ChartTypeEnum chartType
+        )
+        {
+            var folderName = GetFolderNameByChartType(chartType);
+            List<ZScoresDTO> scores;
+
+            if (gender == GenderEnum.Male)
+                scores = GetXlsxZScores($"DataSets\\Boys\\z-scores\\{folderName}\\0_5.xlsx");
+            else
+                scores = GetXlsxZScores($"DataSets\\Girls\\z-scores\\{folderName}\\0_5.xlsx");
+
+            return scores;
         }
 
         /// <summary>

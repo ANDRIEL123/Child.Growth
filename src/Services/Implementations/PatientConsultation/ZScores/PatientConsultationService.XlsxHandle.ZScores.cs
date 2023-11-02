@@ -39,6 +39,7 @@ namespace Child.Growth.src.Services.Implementations
                         ZScore1 = Convert.ToSingle(reader.GetValue(9)),
                         ZScore2 = Convert.ToSingle(reader.GetValue(10)),
                         ZScore3 = Convert.ToSingle(reader.GetValue(11)),
+                        PatientValue = 0
                     };
 
                     scores.Add(zScores);

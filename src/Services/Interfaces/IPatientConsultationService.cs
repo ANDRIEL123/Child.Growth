@@ -16,5 +16,10 @@ namespace Child.Growth.src.Services.Interfaces
             long childrenId,
             ChartTypeEnum chartType
         );
+
+        IEnumerable<ZScoresDTO> GetZScores(
+            long childrenId,
+            ChartTypeEnum chartType
+        );
     }
 }

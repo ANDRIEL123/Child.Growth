@@ -30,7 +30,7 @@ namespace Child.Growth.src.Repositories.Base
         {
             return _context.Set<TEntity>()
                 .Where(filterExpression)
-                .ToList();
+                .AsQueryable();
         }
 
         public IEnumerable<TEntity> GetByFilters(string filters)

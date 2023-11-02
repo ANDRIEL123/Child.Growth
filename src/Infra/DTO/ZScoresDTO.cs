@@ -17,5 +17,7 @@ namespace Child.Growth.src.Infra.DTO
         public float ZScore2 { get; set; }
 
         public float ZScore3 { get; set; }
+
+        public float PatientValue { get; set; }
     }
 }

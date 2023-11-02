@@ -71,7 +71,11 @@ namespace Child.Growth
 
             // Configuração do banco de dados
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            {
+                options
+                    .UseLazyLoadingProxies()
+                    .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

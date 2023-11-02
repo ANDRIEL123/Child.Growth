@@ -20,10 +20,13 @@ namespace Child.Growth.src.Infra.Data
             if (!optionsBuilder.IsConfigured)
             {
                 string connectionString = _configuration.GetConnectionString("DefaultConnection");
-                optionsBuilder.UseSqlServer(connectionString, options =>
-                {
-                    options.EnableRetryOnFailure();
-                });
+
+                optionsBuilder
+                    .UseLazyLoadingProxies()
+                    .UseSqlServer(connectionString, options =>
+                    {
+                        options.EnableRetryOnFailure();
+                    });
             }
         }
 

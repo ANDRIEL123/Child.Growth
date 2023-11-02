@@ -26,7 +26,7 @@ namespace Child.Growth.src.Services.Implementations
             if (children == null)
                 throw new BusinessException("Paciente não localizado.");
 
-            var averages = GetChartDataByType(children.Gender, chartType);
+            var averages = GetChartDataAverageByType(children.Gender, chartType);
             var consults = GetConsultsByChartType(childrenId, chartType);
 
             foreach (var consult in consults)

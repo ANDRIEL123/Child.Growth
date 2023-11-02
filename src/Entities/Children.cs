@@ -5,7 +5,7 @@ using Child.Growth.src.Infra.Enums;
 namespace Child.Growth.src.Entities
 {
     /// <summary>
-    /// Crianças
+    /// Pacientes
     /// </summary>
     public class Children : EntityBase
     {

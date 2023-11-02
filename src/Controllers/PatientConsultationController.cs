@@ -61,6 +61,13 @@ namespace Child.Growth.src.Controllers
             return _patientConsultationService.GetComparativeAveragePercentile(childrenId, chartType);
         }
 
+        [HttpGet("GetZSCoresData")]
+        [Authorize(Roles = "Doctor")]
+        public IEnumerable<ZScoresDTO> GetZSCoresData(long childrenId, ChartTypeEnum chartType)
+        {
+            return _patientConsultationService.GetZScores(childrenId, chartType);
+        }
+
         [HttpPost]
         public ResponseBody Create([FromBody] PatientConsultation entity)
         {

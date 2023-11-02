@@ -7,13 +7,13 @@ namespace Child.Growth.src.Infra.Enums
     /// </summary>
     public enum ChartTypeEnum
     {
-        [Description("Gráfico comparativo de peso P50")]
+        [Description("Peso")]
         Weight,
 
-        [Description("Gráfico comparativo de altura P50")]
+        [Description("Altura")]
         Height,
 
-        [Description("Gráfico comparativo de perímetro cefálico P50")]
+        [Description("Perímetro Cefálico")]
         CephalicPerimeter
     }
 }
