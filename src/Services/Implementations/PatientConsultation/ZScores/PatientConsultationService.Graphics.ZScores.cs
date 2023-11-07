@@ -9,6 +9,13 @@ namespace Child.Growth.src.Services.Implementations
 {
     public partial class PatientConsultationService : ServiceBase<PatientConsultation>, IPatientConsultationService
     {
+        /// <summary>
+        /// Geração dos dados para uso nos gráficos de z-scores
+        /// </summary>
+        /// <param name="childrenId"></param>
+        /// <param name="chartType"></param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
         public IEnumerable<ZScoresDTO> GetZScores(
             long childrenId,
             ChartTypeEnum chartType

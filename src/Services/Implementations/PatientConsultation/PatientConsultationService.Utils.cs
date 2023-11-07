@@ -81,7 +81,7 @@ namespace Child.Growth.src.Services.Implementations
         }
 
         /// <summary>
-        /// Retorna os dados da planilha com base no tipo de gráfico
+        /// Retorna os dados da planilha com base no tipo de gráfico para percentil
         /// Peso, altura e perímetro cefálico
         /// </summary>
         /// <param name="gender"></param>
@@ -93,18 +93,15 @@ namespace Child.Growth.src.Services.Implementations
         )
         {
             var folderName = GetFolderNameByChartType(chartType);
-            List<PercentilesDTO> averages;
 
             if (gender == GenderEnum.Male)
-                averages = GetAveragePercentile($"DataSets\\Boys\\percentiles\\{folderName}\\0_5.xlsx");
+                return GetAveragePercentile($"DataSets\\Boys\\percentiles\\{folderName}\\0_5.xlsx");
             else
-                averages = GetAveragePercentile($"DataSets\\Girls\\percentiles\\{folderName}\\0_5.xlsx");
-
-            return averages;
+                return GetAveragePercentile($"DataSets\\Girls\\percentiles\\{folderName}\\0_5.xlsx");
         }
 
         /// <summary>
-        /// Retorna os dados da planilha com base no tipo de gráfico
+        /// Retorna os dados da planilha com base no tipo de gráfico para z-score
         /// Peso, altura e perímetro cefálico
         /// </summary>
         /// <param name="gender"></param>
@@ -116,14 +113,11 @@ namespace Child.Growth.src.Services.Implementations
         )
         {
             var folderName = GetFolderNameByChartType(chartType);
-            List<ZScoresDTO> scores;
 
             if (gender == GenderEnum.Male)
-                scores = GetXlsxZScores($"DataSets\\Boys\\z-scores\\{folderName}\\0_5.xlsx");
+                return GetXlsxZScores($"DataSets\\Boys\\z-scores\\{folderName}\\0_5.xlsx");
             else
-                scores = GetXlsxZScores($"DataSets\\Girls\\z-scores\\{folderName}\\0_5.xlsx");
-
-            return scores;
+                return GetXlsxZScores($"DataSets\\Girls\\z-scores\\{folderName}\\0_5.xlsx");
         }
 
         /// <summary>
