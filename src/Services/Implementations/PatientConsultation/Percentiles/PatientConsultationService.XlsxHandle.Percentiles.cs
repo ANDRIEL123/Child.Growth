@@ -15,39 +15,35 @@ namespace Child.Growth.src.Services.Implementations
         /// <returns></returns>
         private static List<PercentilesDTO> GetAveragePercentile(string filePath)
         {
+            if (File.Exists(filePath))
+                throw new Exception($"Arquivo {filePath} não localizado");
+
             var percentiles = new List<PercentilesDTO>();
 
-            try
+            using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
+            using var reader = ExcelReaderFactory.CreateReader(stream);
+            do
             {
-                using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
-                using var reader = ExcelReaderFactory.CreateReader(stream);
-                do
+                while (reader.Read())
                 {
-                    while (reader.Read())
+                    // Ignora o cabeçalho (primeira linha)
+                    if (reader.Depth == 0)
+                        continue;
+
+                    var month = Convert.ToInt32(reader.GetValue(0)) + 1;
+                    var average = Convert.ToSingle(reader.GetValue(11));
+
+                    var percentil = new PercentilesDTO
                     {
-                        // Ignora o cabeçalho (primeira linha)
-                        if (reader.Depth == 0)
-                            continue;
+                        Month = month,
+                        Average = average
+                    };
 
-                        var month = Convert.ToInt32(reader.GetValue(0)) + 1;
-                        var average = Convert.ToSingle(reader.GetValue(11));
+                    percentiles.Add(percentil);
+                }
+            } while (reader.NextResult());
 
-                        var percentil = new PercentilesDTO
-                        {
-                            Month = month,
-                            Average = average
-                        };
-
-                        percentiles.Add(percentil);
-                    }
-                } while (reader.NextResult());
-
-                return percentiles;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return percentiles;
         }
     }
 }
