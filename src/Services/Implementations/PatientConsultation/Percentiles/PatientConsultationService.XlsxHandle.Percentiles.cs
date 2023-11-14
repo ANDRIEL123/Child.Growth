@@ -17,30 +17,37 @@ namespace Child.Growth.src.Services.Implementations
         {
             var percentiles = new List<PercentilesDTO>();
 
-            using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
-            using var reader = ExcelReaderFactory.CreateReader(stream);
-            do
+            try
             {
-                while (reader.Read())
+                using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
+                using var reader = ExcelReaderFactory.CreateReader(stream);
+                do
                 {
-                    // Ignora o cabeçalho (primeira linha)
-                    if (reader.Depth == 0)
-                        continue;
-
-                    var month = Convert.ToInt32(reader.GetValue(0)) + 1;
-                    var average = Convert.ToSingle(reader.GetValue(11));
-
-                    var percentil = new PercentilesDTO
+                    while (reader.Read())
                     {
-                        Month = month,
-                        Average = average
-                    };
+                        // Ignora o cabeçalho (primeira linha)
+                        if (reader.Depth == 0)
+                            continue;
 
-                    percentiles.Add(percentil);
-                }
-            } while (reader.NextResult());
+                        var month = Convert.ToInt32(reader.GetValue(0)) + 1;
+                        var average = Convert.ToSingle(reader.GetValue(11));
 
-            return percentiles;
+                        var percentil = new PercentilesDTO
+                        {
+                            Month = month,
+                            Average = average
+                        };
+
+                        percentiles.Add(percentil);
+                    }
+                } while (reader.NextResult());
+
+                return percentiles;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

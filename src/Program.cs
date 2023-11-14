@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-var startup = new Startup(builder.Configuration); // Cria uma instância do Startup
+// Cria uma instância do Startup
+var startup = new Startup(builder.Configuration);
 
 // Adicione serviços ao contêiner.
 startup.ConfigureServices(builder.Services);

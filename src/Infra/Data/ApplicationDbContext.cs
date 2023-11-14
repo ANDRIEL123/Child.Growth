@@ -13,6 +13,9 @@ namespace Child.Growth.src.Infra.Data
         ) : base(options)
         {
             _configuration = configuration;
+
+            // Cria schema e tables caso não tenha
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -20,8 +20,6 @@ namespace Child.Growth
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configurações gerais
-
             // Adicione serviços do ASP.NET Core MVC
             services.AddControllersWithViews()
                 .AddJsonOptions(options =>
@@ -73,7 +71,7 @@ namespace Child.Growth
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options
-                    .UseLazyLoadingProxies()
+                    .UseLazyLoadingProxies() // Adiciona para carregar automaticamente entidades associadas ao acessar por uma consulta Linq por exemplo
                     .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
         }
