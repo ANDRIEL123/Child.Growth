@@ -15,8 +15,6 @@ namespace Child.Growth.src.Services.Implementations
         /// <returns></returns>
         private static List<ZScoresDTO> GetXlsxZScores(string filePath)
         {
-            filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
-
             if (!File.Exists(filePath))
                 throw new Exception($"Arquivo {filePath} não localizado");
 

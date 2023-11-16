@@ -8,6 +8,8 @@ namespace Child.Growth.src.Services.Implementations
 {
     public partial class PatientConsultationService : ServiceBase<PatientConsultation>, IPatientConsultationService
     {
+        private string baseDataSets = "DataSets";
+
         /// <summary>
         /// Retorna o tempo de vida em meses com base 
         /// no aniversário e na data da consulta
@@ -92,11 +94,7 @@ namespace Child.Growth.src.Services.Implementations
         )
         {
             var folderName = GetFolderNameByChartType(chartType);
-
-            if (gender == GenderEnum.Male)
-                return GetAveragePercentile($"DataSets\\Boys\\percentiles\\{folderName}\\0_5.xlsx");
-            else
-                return GetAveragePercentile($"DataSets\\Girls\\percentiles\\{folderName}\\0_5.xlsx");
+            return GetAveragePercentile(GetFilePath(folderName, "percentiles", gender));
         }
 
         /// <summary>
@@ -112,11 +110,7 @@ namespace Child.Growth.src.Services.Implementations
         )
         {
             var folderName = GetFolderNameByChartType(chartType);
-
-            if (gender == GenderEnum.Male)
-                return GetXlsxZScores($"DataSets\\Boys\\z-scores\\{folderName}\\0_5.xlsx");
-            else
-                return GetXlsxZScores($"DataSets\\Girls\\z-scores\\{folderName}\\0_5.xlsx");
+            return GetXlsxZScores(GetFilePath(folderName, "z-scores", gender));
         }
 
         /// <summary>
@@ -133,6 +127,25 @@ namespace Child.Growth.src.Services.Implementations
                 ChartTypeEnum.CephalicPerimeter => "cephalic_perimeter",
                 _ => string.Empty,
             };
+        }
+
+        /// <summary>
+        /// Retorna o caminho da planilha
+        /// </summary>
+        /// <param name="folderName"></param>
+        /// <param name="type"></param>
+        /// <param name="gender"></param>
+        /// <returns></returns>
+        private static string GetFilePath(
+            string folderName,
+            string type,
+            GenderEnum gender
+        )
+        {
+            var stringGender = gender == GenderEnum.Male ? "Boys" : "Girls";
+            var BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            return Path.Combine(BaseDirectory, "DataSets", stringGender, type, folderName, "0_5.xlsx");
         }
     }
 }
