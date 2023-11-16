@@ -42,13 +42,17 @@ namespace Child.Growth.src.Services.Implementations
                 // Compara o tempo de vida em meses do paciente com os dados das planilhas
                 var average = averages
                     .Where(x => x.Month == childrenMonthsOfLifeInConsult)
-                    .Select(x => x.Average)
+                    .Select(x => new
+                    {
+                        x.Average,
+                        x.Month
+                    })
                     .FirstOrDefault();
 
                 var comparativeAverage = new ComparativeAveragePercentileDTO
                 {
-                    Month = consult.Month,
-                    Average = average,
+                    Month = average.Month.ToString(),
+                    Average = average.Average,
                     PatientValue = consult.PatientValue
                 };
 

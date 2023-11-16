@@ -47,7 +47,6 @@ namespace Child.Growth.src.Services.Implementations
             return _repository
                 .Query(x => x.ChildrenId == childrenId)
                 .OrderByDescending(x => x.Date)
-                .Take(10)
                 .GroupBy(x => new { x.Date.Month, x.Date.Year })
                 .Select(x => new ComparativeAveragePercentileConsultDTO
                 {

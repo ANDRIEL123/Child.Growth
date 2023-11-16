@@ -15,7 +15,9 @@ namespace Child.Growth.src.Services.Implementations
         /// <returns></returns>
         private static List<PercentilesDTO> GetAveragePercentile(string filePath)
         {
-            if (File.Exists(filePath))
+            filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
+
+            if (!File.Exists(filePath))
                 throw new Exception($"Arquivo {filePath} não localizado");
 
             var percentiles = new List<PercentilesDTO>();
@@ -30,7 +32,7 @@ namespace Child.Growth.src.Services.Implementations
                     if (reader.Depth == 0)
                         continue;
 
-                    var month = Convert.ToInt32(reader.GetValue(0)) + 1;
+                    var month = Convert.ToInt32(reader.GetValue(0));
                     var average = Convert.ToSingle(reader.GetValue(11));
 
                     var percentil = new PercentilesDTO

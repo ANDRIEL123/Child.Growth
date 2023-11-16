@@ -38,7 +38,7 @@ namespace Child.Growth.src.Services.Implementations
             );
 
             if (lifeTimeInMonths > (12 * 5))
-                throw new BusinessException($"São comparados somente pacientes de até 5 anos, na consulta do dia {lastConsult.Date:dd/MM/yyyy} o paciente possuí mais: {lifeTimeInMonths} meses.");
+                throw new Exception($"São comparados somente pacientes de até 5 anos, na consulta do dia {lastConsult.Date:dd/MM/yyyy} o paciente possuí mais: {lifeTimeInMonths} meses.");
 
             var consults = GetConsultsByChartType(childrenId, chartType);
 
@@ -48,8 +48,13 @@ namespace Child.Growth.src.Services.Implementations
 
             foreach (var consult in consults)
             {
+                var lifeTimeOnConsult = GetLifeTimeInMonthsAtConsult(
+                    lastConsult.BirthDate,
+                    consult.Date
+                );
+
                 var score = scores
-                    .Where(x => x.Month == consult.Date.Value.Month)
+                    .Where(x => x.Month == lifeTimeOnConsult)
                     .FirstOrDefault();
 
                 score.PatientValue = consult.PatientValue;

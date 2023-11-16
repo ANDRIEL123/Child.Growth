@@ -15,7 +15,9 @@ namespace Child.Growth.src.Services.Implementations
         /// <returns></returns>
         private static List<ZScoresDTO> GetXlsxZScores(string filePath)
         {
-            if (File.Exists(filePath))
+            filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
+
+            if (!File.Exists(filePath))
                 throw new Exception($"Arquivo {filePath} não localizado");
 
             var scores = new List<ZScoresDTO>();
@@ -30,7 +32,7 @@ namespace Child.Growth.src.Services.Implementations
                     if (reader.Depth == 0)
                         continue;
 
-                    var month = Convert.ToInt32(reader.GetValue(0)) + 1;
+                    var month = Convert.ToInt32(reader.GetValue(0));
 
                     var zScores = new ZScoresDTO
                     {
