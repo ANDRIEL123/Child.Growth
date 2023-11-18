@@ -1,3 +1,4 @@
+using Child.Growth.src.Controllers.Base;
 using Child.Growth.src.Entities;
 using Child.Growth.src.Infra.DTO;
 using Child.Growth.src.Infra.Enums;
@@ -10,7 +11,7 @@ namespace Child.Growth.src.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PatientConsultationController : ControllerBase
+    public class PatientConsultationController : AppControllerBase
     {
         private readonly IPatientConsultationService _patientConsultationService;
 
@@ -46,19 +47,21 @@ namespace Child.Growth.src.Controllers
 
         [HttpGet("GetGraphComparativeData")]
         [Authorize(Roles = "Doctor")]
-        public List<ComparativeData> GetGraphComparativeData(long childrenId)
+        public IActionResult GetGraphComparativeData(long childrenId)
         {
-            return _patientConsultationService.GetComparativeData(childrenId);
+            return Ok(_patientConsultationService.GetComparativeData(childrenId));
         }
 
         [HttpGet("GetComparativeAveragePercentile")]
         [Authorize(Roles = "Doctor")]
-        public IEnumerable<ComparativeAveragePercentileDTO> GetComparativeAveragePercentile(
+        public IActionResult GetComparativeAveragePercentile(
             long childrenId,
             ChartTypeEnum chartType
         )
         {
-            return _patientConsultationService.GetComparativeAveragePercentile(childrenId, chartType);
+            return Ok(_patientConsultationService
+                .GetComparativeAveragePercentile(childrenId, chartType)
+            );
         }
 
         [HttpGet("GetZSCoresData")]

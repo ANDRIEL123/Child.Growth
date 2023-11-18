@@ -1,3 +1,4 @@
+using Child.Growth.src.Controllers.Base;
 using Child.Growth.src.Entities;
 using Child.Growth.src.Infra.Responses;
 using Child.Growth.src.Services.Interfaces;
@@ -8,7 +9,7 @@ namespace Child.Growth.src.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : AppControllerBase
     {
         private readonly ILogger<UsersController> _logger;
 

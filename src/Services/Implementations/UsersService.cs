@@ -1,7 +1,6 @@
 using Child.Growth.src.Infra.Data.UnitOfWork;
 using Child.Growth.src.Entities;
 using Child.Growth.src.Services.Interfaces;
-using Child.Growth.src.Infra.Exceptions;
 using Child.Growth.src.Services.Base;
 using Child.Growth.src.Repositories.Base;
 using Child.Growth.src.Infra.Responses;
@@ -39,7 +38,7 @@ namespace Child.Growth.src.Services.Implementations
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        /// <exception cref="BusinessException"></exception>
+        /// <exception cref="Exception"></exception>
         public object Login(string email, string password)
         {
             var user = CheckCredentials(email, password);
