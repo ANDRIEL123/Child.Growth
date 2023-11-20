@@ -48,7 +48,7 @@ namespace Child.Growth.src.Services.Base
         public ResponseBody Create(T entity)
         {
             if (entity == null)
-                throw new Exception($"Ocorreu um erro ao criar {entity.GetType().FullName}, entidade está null");
+                throw new BusinessException($"Ocorreu um erro ao criar {entity.GetType().FullName}, entidade está null");
 
             entity.CreatedAt = DateTime.Now;
 
@@ -79,7 +79,7 @@ namespace Child.Growth.src.Services.Base
         public ResponseBody Update(T entity)
         {
             if (entity == null)
-                throw new Exception($"Ocorreu um erro ao criar {entity.GetType().FullName}, entidade está null");
+                throw new BusinessException($"Ocorreu um erro ao criar {entity.GetType().FullName}, entidade está null");
 
             entity.ModifiedAt = DateTime.Now;
 
@@ -110,7 +110,7 @@ namespace Child.Growth.src.Services.Base
         public ResponseBody Delete(long id)
         {
             if (id == default)
-                throw new Exception("Id não informado corretamente.");
+                throw new BusinessException("Id não informado corretamente.");
 
             try
             {

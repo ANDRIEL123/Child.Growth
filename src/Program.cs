@@ -1,6 +1,7 @@
 using Child.Growth;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,13 @@ builder.Services.AddSingleton<ITempDataDictionaryFactory, TempDataDictionaryFact
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.File("logs/log.log",
+        rollingInterval: RollingInterval.Day,
+        rollOnFileSizeLimit: true)
+    .CreateLogger();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Child.Growth Project", Version = "v1" });
@@ -51,13 +59,6 @@ var app = builder.Build();
 
 // Configura o pipeline de solicitação HTTP.
 startup.Configure(app, app.Environment);
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.MapControllers();
 

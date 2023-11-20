@@ -38,7 +38,7 @@ namespace Child.Growth.src.Services.Implementations
             );
 
             if (lifeTimeInMonths > (12 * 5))
-                throw new Exception($"São comparados somente pacientes de até 5 anos, na consulta do dia {lastConsult.Date:dd/MM/yyyy} o paciente possuí mais: {lifeTimeInMonths} meses.");
+                throw new BusinessException($"São comparados somente pacientes de até 5 anos, na consulta do dia {lastConsult.Date:dd/MM/yyyy} o paciente possuí mais: {lifeTimeInMonths} meses.");
 
             var consults = GetConsultsByChartType(childrenId, chartType);
 

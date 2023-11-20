@@ -4,6 +4,7 @@ using Child.Growth.src.Services.Interfaces;
 using Child.Growth.src.Services.Base;
 using Child.Growth.src.Repositories.Base;
 using Child.Growth.src.Infra.Responses;
+using Child.Growth.src.Infra.Exceptions;
 
 namespace Child.Growth.src.Services.Implementations
 {
@@ -27,7 +28,7 @@ namespace Child.Growth.src.Services.Implementations
         public new ResponseBody Create(Users entity)
         {
             if (CheckIfTheUserExists(entity))
-                throw new Exception("Já existe um usuário com esse e-mail");
+                throw new BusinessException("Já existe um usuário com esse e-mail");
 
             return base.Create(entity);
         }
@@ -63,7 +64,7 @@ namespace Child.Growth.src.Services.Implementations
                 .FirstOrDefault();
 
             if (user == null || string.IsNullOrEmpty(email))
-                throw new Exception("Credenciais invalidas.");
+                throw new BusinessException("Credenciais invalidas.");
 
             return user;
         }

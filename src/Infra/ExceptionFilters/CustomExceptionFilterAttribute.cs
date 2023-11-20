@@ -2,6 +2,7 @@ using Child.Growth.src.Infra.Exceptions;
 using Child.Growth.src.Infra.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Serilog;
 
 public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
 {
@@ -23,6 +24,8 @@ public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
                 StatusCode = 500
             };
         }
+
+        Log.Error(context.Exception.Message);
 
         base.OnException(context);
     }

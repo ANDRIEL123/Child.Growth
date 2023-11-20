@@ -3,6 +3,7 @@ using Child.Growth.src.Services.Interfaces;
 using Child.Growth.src.Services.Base;
 using ExcelDataReader;
 using Child.Growth.src.Infra.DTO;
+using Child.Growth.src.Infra.Exceptions;
 
 namespace Child.Growth.src.Services.Implementations
 {
@@ -15,8 +16,8 @@ namespace Child.Growth.src.Services.Implementations
         /// <returns></returns>
         private static List<PercentilesDTO> GetAveragePercentile(string filePath)
         {
-            if (!File.Exists(filePath))
-                throw new Exception($"Arquivo {filePath} não localizado");
+            if (!File.Exists(filePath + "x"))
+                throw new BusinessException($"Arquivo {filePath} não localizado");
 
             var percentiles = new List<PercentilesDTO>();
 

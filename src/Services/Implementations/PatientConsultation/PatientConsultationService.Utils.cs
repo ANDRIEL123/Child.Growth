@@ -8,8 +8,6 @@ namespace Child.Growth.src.Services.Implementations
 {
     public partial class PatientConsultationService : ServiceBase<PatientConsultation>, IPatientConsultationService
     {
-        private string baseDataSets = "DataSets";
-
         /// <summary>
         /// Retorna o tempo de vida em meses com base 
         /// no aniversário e na data da consulta

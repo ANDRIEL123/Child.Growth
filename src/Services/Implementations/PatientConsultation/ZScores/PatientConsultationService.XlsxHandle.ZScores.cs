@@ -3,6 +3,7 @@ using Child.Growth.src.Services.Interfaces;
 using Child.Growth.src.Services.Base;
 using ExcelDataReader;
 using Child.Growth.src.Infra.DTO;
+using Child.Growth.src.Infra.Exceptions;
 
 namespace Child.Growth.src.Services.Implementations
 {
@@ -16,7 +17,7 @@ namespace Child.Growth.src.Services.Implementations
         private static List<ZScoresDTO> GetXlsxZScores(string filePath)
         {
             if (!File.Exists(filePath))
-                throw new Exception($"Arquivo {filePath} não localizado");
+                throw new BusinessException($"Arquivo {filePath} não localizado");
 
             var scores = new List<ZScoresDTO>();
 

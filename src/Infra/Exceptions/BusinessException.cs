@@ -1,4 +1,4 @@
-using System.Collections;
+using Serilog;
 
 namespace Child.Growth.src.Infra.Exceptions
 {
@@ -7,6 +7,7 @@ namespace Child.Growth.src.Infra.Exceptions
         string _message;
         public BusinessException(string message) : base(message)
         {
+            Log.Error(message);
             _message = message;
         }
 

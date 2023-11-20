@@ -39,18 +39,6 @@ namespace Child.Growth
             // Registra o Unit of Work no Container de Injeção de Dependência
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            // Habita cors
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAllOrigins",
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader();
-                    });
-            });
-
             // Injeta os serviços
             InjectServices.AddServices(services);
 
@@ -81,6 +69,8 @@ namespace Child.Growth
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
             else
             {
