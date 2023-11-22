@@ -15,7 +15,5 @@ namespace Child.Growth.src.Infra.Exceptions
         {
             return _message;
         }
-
-        public override string Message => _message;
     }
 }

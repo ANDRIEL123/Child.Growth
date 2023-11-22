@@ -2,6 +2,7 @@ using Child.Growth.src.Controllers.Base;
 using Child.Growth.src.Entities;
 using Child.Growth.src.Infra.DTO;
 using Child.Growth.src.Infra.Enums;
+using Child.Growth.src.Infra.Exceptions;
 using Child.Growth.src.Infra.Responses;
 using Child.Growth.src.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -33,9 +34,9 @@ namespace Child.Growth.src.Controllers
         [Authorize(Roles = "Doctor")]
         public List<PatientConsultation> GetByFilters(string filters)
         {
-            var PatientConsultationByFilter = _patientConsultationService.GetByFilters(filters);
+            var patientConsultationByFilter = _patientConsultationService.GetByFilters(filters);
 
-            return PatientConsultationByFilter;
+            return patientConsultationByFilter;
         }
 
         [HttpGet("GetConsultsByUserId")]

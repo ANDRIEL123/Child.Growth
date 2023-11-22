@@ -1,12 +1,10 @@
 using Child.Growth.src.Entities;
-using Child.Growth.src.Services.Interfaces;
-using Child.Growth.src.Services.Base;
 using Child.Growth.src.Infra.Enums;
 using Child.Growth.src.Infra.DTO;
 
 namespace Child.Growth.src.Services.Implementations
 {
-    public partial class PatientConsultationService : ServiceBase<PatientConsultation>, IPatientConsultationService
+    public partial class PatientConsultationService
     {
         /// <summary>
         /// Retorna o tempo de vida em meses com base 

@@ -1,13 +1,10 @@
-using Child.Growth.src.Entities;
-using Child.Growth.src.Services.Interfaces;
-using Child.Growth.src.Services.Base;
 using Child.Growth.src.Infra.DTO;
 using Child.Growth.src.Infra.Exceptions;
 using Child.Growth.src.Infra.Enums;
 
 namespace Child.Growth.src.Services.Implementations
 {
-    public partial class PatientConsultationService : ServiceBase<PatientConsultation>, IPatientConsultationService
+    public partial class PatientConsultationService
     {
         /// <summary>
         /// Retorna os dados de média P50 e peso

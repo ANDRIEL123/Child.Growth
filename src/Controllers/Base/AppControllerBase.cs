@@ -17,13 +17,13 @@ namespace Child.Growth.src.Controllers.Base
                 {
                     Code = 500,
                     Message = context.Exception.Message,
-                    Content = null
+                    Content = context.Exception.StackTrace
                 })
                 {
                     StatusCode = 500
                 };
 
-                // Marque a exceção como tratada para evitar tratamento adicional pelo ASP.NET Core.
+                // Marca a exceção como tratada para evitar tratamento adicional pelo ASP.NET Core.
                 context.ExceptionHandled = true;
             }
 

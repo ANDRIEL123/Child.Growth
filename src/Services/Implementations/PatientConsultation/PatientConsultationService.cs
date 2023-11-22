@@ -11,6 +11,7 @@ namespace Child.Growth.src.Services.Implementations
     {
         private readonly IRepository<PatientConsultation> _repository;
         private readonly IRepository<Children> _childrenRepository;
+
         public PatientConsultationService(
             IRepository<PatientConsultation> repository,
             IRepository<Children> childrenRepository,
@@ -43,9 +44,7 @@ namespace Child.Growth.src.Services.Implementations
         public ResponseBody GetConsultsByUserId(long userId)
         {
             var consults = _repository
-                .Query(x =>
-                    x.Children.Responsible.UserId == userId
-                )
+                .Query(x => x.Children.Responsible.UserId == userId)
                 .ToList();
 
             return new ResponseBody

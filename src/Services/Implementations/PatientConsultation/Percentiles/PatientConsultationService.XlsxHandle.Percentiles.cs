@@ -1,13 +1,10 @@
-using Child.Growth.src.Entities;
-using Child.Growth.src.Services.Interfaces;
-using Child.Growth.src.Services.Base;
 using ExcelDataReader;
 using Child.Growth.src.Infra.DTO;
 using Child.Growth.src.Infra.Exceptions;
 
 namespace Child.Growth.src.Services.Implementations
 {
-    public partial class PatientConsultationService : ServiceBase<PatientConsultation>, IPatientConsultationService
+    public partial class PatientConsultationService
     {
         /// <summary>
         /// Retorna uma lista de percentis (Mês e Média)
@@ -16,7 +13,7 @@ namespace Child.Growth.src.Services.Implementations
         /// <returns></returns>
         private static List<PercentilesDTO> GetAveragePercentile(string filePath)
         {
-            if (!File.Exists(filePath + "x"))
+            if (!File.Exists(filePath))
                 throw new BusinessException($"Arquivo {filePath} não localizado");
 
             var percentiles = new List<PercentilesDTO>();

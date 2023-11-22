@@ -1,13 +1,10 @@
-using Child.Growth.src.Entities;
-using Child.Growth.src.Services.Interfaces;
-using Child.Growth.src.Services.Base;
 using ExcelDataReader;
 using Child.Growth.src.Infra.DTO;
 using Child.Growth.src.Infra.Exceptions;
 
 namespace Child.Growth.src.Services.Implementations
 {
-    public partial class PatientConsultationService : ServiceBase<PatientConsultation>, IPatientConsultationService
+    public partial class PatientConsultationService
     {
         /// <summary>
         /// Retorna uma lista de z-scores
@@ -16,7 +13,7 @@ namespace Child.Growth.src.Services.Implementations
         /// <returns></returns>
         private static List<ZScoresDTO> GetXlsxZScores(string filePath)
         {
-            if (!File.Exists(filePath))
+            if (!File.Exists(filePath + "x"))
                 throw new BusinessException($"Arquivo {filePath} não localizado");
 
             var scores = new List<ZScoresDTO>();
