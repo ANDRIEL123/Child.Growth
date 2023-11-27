@@ -1,3 +1,4 @@
+using System.Globalization;
 using Child.Growth;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.OpenApi.Models;
@@ -23,7 +24,9 @@ builder.Services.AddEndpointsApiExplorer();
 Log.Logger = new LoggerConfiguration()
     .WriteTo.File("logs/log.log",
         rollingInterval: RollingInterval.Day,
-        rollOnFileSizeLimit: true)
+        rollOnFileSizeLimit: true,
+        outputTemplate: "{Timestamp:dd/MM/yyyy HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}"
+    )
     .CreateLogger();
 
 builder.Services.AddSwaggerGen(c =>

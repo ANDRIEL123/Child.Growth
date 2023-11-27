@@ -1,6 +1,7 @@
 using Child.Growth.src.Infra.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Serilog;
 
 namespace Child.Growth.src.Controllers.Base
 {
@@ -22,6 +23,9 @@ namespace Child.Growth.src.Controllers.Base
                 {
                     StatusCode = 500
                 };
+
+                // Adiciona erro ao log
+                Log.Error(context.Exception.Message, context.Exception.StackTrace);
 
                 // Marca a exceção como tratada para evitar tratamento adicional pelo ASP.NET Core.
                 context.ExceptionHandled = true;

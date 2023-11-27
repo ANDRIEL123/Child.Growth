@@ -13,7 +13,7 @@ namespace Child.Growth.src.Services.Implementations
         /// <returns></returns>
         private static List<ZScoresDTO> GetXlsxZScores(string filePath)
         {
-            if (!File.Exists(filePath + "x"))
+            if (!File.Exists(filePath))
                 throw new BusinessException($"Arquivo {filePath} não localizado");
 
             var scores = new List<ZScoresDTO>();

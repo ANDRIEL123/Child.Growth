@@ -7,7 +7,7 @@ namespace Child.Growth.src.Infra.Exceptions
         string _message;
         public BusinessException(string message) : base(message)
         {
-            Log.Error(message);
+            Log.Error(message, StackTrace);
             _message = message;
         }
 
